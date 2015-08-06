@@ -25,6 +25,8 @@ an optional target fragment which describes the position of the save relation bu
 	:::php
 	$config->addComponent(new GridFieldHasOneRelationHandler($this, 'MainImage'));
 
+If you want the ability to select no item, add a row to your database with the ID of 0.
+
 ## GridFieldManyRelationHandler ##
 
 ![](https://files.app.net/zb9r7VqE.png)
@@ -67,4 +69,3 @@ it for the pagination to work properly.
 	ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
