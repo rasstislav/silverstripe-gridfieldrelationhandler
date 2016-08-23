@@ -106,7 +106,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('SAVE_RELATION'),
 					'saveGridRelation',
 					null
-				)
+				)->addExtraClass('relationhandler-saverel')
 			);
 		} elseif($state->ShowingRelation) {
 			$fields = array(
@@ -117,7 +117,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('CANCELSAVE_RELATION'),
 					'cancelGridRelation',
 					null
-				),
+				)->addExtraClass('relationhandler-cancelrel'),
 				Object::create(
 					'GridField_FormAction',
 					$gridField,
@@ -125,7 +125,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('SAVE_RELATION'),
 					'saveGridRelation',
 					null
-				)
+				)->addExtraClass('relationhandler-saverel')
 			);
 		} else {
 			$fields = array(
@@ -136,7 +136,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('TOGGLE_RELATION'),
 					'toggleGridRelation',
 					null
-				)
+				)->addExtraClass('relationhandler-togglerel')
 			);
 		}
 		return new ArrayList($fields);
