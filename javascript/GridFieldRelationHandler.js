@@ -21,9 +21,9 @@ jQuery(function($) {
 				} else if(input.hasClass('checkbox')) {
 					if(state.RelationVal.indexOf) {
 						if(input.is(':checked')) {
-							state.RelationVal.push(input.val());
+							state.RelationVal.push(parseInt(input.val()));
 						} else {
-							var index = state.RelationVal.indexOf(input.val());
+							var index = state.RelationVal.indexOf(parseInt(input.val()));
 							if(index != -1) {
 								var left = state.RelationVal.slice(0, index);
 								var right = state.RelationVal.slice(index+1);
