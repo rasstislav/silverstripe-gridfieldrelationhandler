@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridField_DataManipulator;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\HasManyList;
+use SilverStripe\ORM\ManyManyList;
+use SilverStripe\ORM\RelationList;
+use SilverStripe\ORM\SS_List;
+use SilverStripe\View\ArrayData;
+
 class GridFieldManyRelationHandler extends GridFieldRelationHandler implements GridField_DataManipulator {
 	protected $cheatList;
 	protected $cheatManyList;
@@ -25,7 +35,7 @@ class GridFieldManyRelationHandler extends GridFieldRelationHandler implements G
 				$field['Disabled'] = true;
 			}
 		}
-		$field = new ArrayData($field);
+		$field = ArrayData::create($field);
 		return $field->renderWith('GridFieldManyRelationHandlerItem');
 	}
 
@@ -49,19 +59,20 @@ class GridFieldManyRelationHandler extends GridFieldRelationHandler implements G
 			$query->removeFilterOn($this->cheatList->getForeignIDFilter($list));
 		} catch(InvalidArgumentException $e) { /* NOP */ }
 		$orgList = $list;
-		$list = new DataList($list->dataClass());
+		$list = DataList::create($list->dataClass());
 		$list = $list->setDataQuery($query);
 		if($orgList instanceof ManyManyList) {
 			$joinTable = $this->cheatManyList->getJoinTable($orgList);
-			$baseClass = ClassInfo::baseDataClass($list->dataClass());
+            $baseClass = DataObject::getSchema()->baseDataClass($list->dataClass());
+            $baseTable = DataObject::getSchema()->tableName($baseClass);
 			$localKey = $this->cheatManyList->getLocalKey($orgList);
-			$query->leftJoin($joinTable, "\"$joinTable\".\"$localKey\" = \"$baseClass\".\"ID\"");
+			$query->leftJoin($joinTable, "\"$joinTable\".\"$localKey\" = \"$baseTable\".\"ID\"");
 			$list = $list->setDataQuery($query);
 		}
 		return $list;
 	}
 
-	protected function relationName($gridField) {
+	protected function relationName(GridField $gridField) {
 		return $gridField->getName() . get_class($gridField->getList());
 	}
 

@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\ORM\HasManyList;
+use SilverStripe\ORM\ManyManyList;
+use SilverStripe\ORM\RelationList;
+
 class GridFieldManyRelationHandler_HasManyList extends HasManyList {
 	public function __construct() {
 

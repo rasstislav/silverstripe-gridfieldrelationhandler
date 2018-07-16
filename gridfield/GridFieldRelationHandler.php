@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridField_ActionProvider;
+use SilverStripe\Forms\GridField\GridField_ColumnProvider;
+use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Forms\GridField\GridField_HTMLProvider;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
+
 abstract class GridFieldRelationHandler implements GridField_ColumnProvider, GridField_HTMLProvider, GridField_ActionProvider {
 	protected $targetFragment;
 	protected $useToggle;
@@ -99,7 +109,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 		$state = $this->getState($gridField);
 		if(!$this->useToggle) {
 			$fields = array(
-				Object::create(
+                GridField_FormAction::create(
 					'GridField_FormAction',
 					$gridField,
 					'relationhandler-saverel',
@@ -110,16 +120,14 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 			);
 		} elseif($state->ShowingRelation) {
 			$fields = array(
-				Object::create(
-					'GridField_FormAction',
+                GridField_FormAction::create(
 					$gridField,
 					'relationhandler-cancelrel',
 					$this->getButtonTitle('CANCELSAVE_RELATION'),
 					'cancelGridRelation',
 					null
 				)->addExtraClass('relationhandler-cancelrel'),
-				Object::create(
-					'GridField_FormAction',
+                GridField_FormAction::create(
 					$gridField,
 					'relationhandler-saverel',
 					$this->getButtonTitle('SAVE_RELATION'),
@@ -129,8 +137,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 			);
 		} else {
 			$fields = array(
-				Object::create(
-					'GridField_FormAction',
+                GridField_FormAction::create(
 					$gridField,
 					'relationhandler-togglerel',
 					$this->getButtonTitle('TOGGLE_RELATION'),
@@ -139,13 +146,13 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 				)->addExtraClass('relationhandler-togglerel')
 			);
 		}
-		return new ArrayList($fields);
+		return ArrayList::create($fields);
 	}
 
 	public function getHTMLFragments($gridField) {
 		Requirements::javascript(basename(dirname(__DIR__)) . '/javascript/GridFieldRelationHandler.js');
 		$saveRelation = 
-		$data = new ArrayData(array(
+		$data = ArrayData::create(array(
 			'Fields' => $this->getFields($gridField)
 		));
 		return array(

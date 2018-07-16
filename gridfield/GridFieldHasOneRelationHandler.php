@@ -1,5 +1,9 @@
 <?php
 
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\View\ArrayData;
+
 class GridFieldHasOneRelationHandler extends GridFieldRelationHandler {
 	protected $onObject;
 	protected $relationName;
@@ -35,7 +39,7 @@ class GridFieldHasOneRelationHandler extends GridFieldRelationHandler {
 		$state = $this->getState($gridField);
 		
 		$checked = $state->RelationVal == $record->ID;
-		$field = new ArrayData(array('Checked' => $checked, 'Value' => $record->ID, 'Name' => $this->relationName . 'ID'));
+		$field = ArrayData::create(array('Checked' => $checked, 'Value' => $record->ID, 'Name' => $this->relationName . 'ID'));
 		return $field->renderWith('GridFieldHasOneRelationHandlerItem');
 	}
 
