@@ -14,11 +14,11 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 	protected $targetFragment;
 	protected $useToggle;
 
-	protected $columnTitle = 'Relation Status';
+	protected $columnTitle = 'Linked';
 	protected $buttonTitles = array(
-		'SAVE_RELATION' => 'Save changes',
-		'CANCELSAVE_RELATION' => 'Cancel changes',
-		'TOGGLE_RELATION' => 'Change relation status',
+		'SAVE_RELATION' => 'Save Linked',
+		'CANCELSAVE_RELATION' => 'Cancel',
+		'TOGGLE_RELATION' => 'Choose Existing...',
 	);
 
 	public function __construct($useToggle = true, $targetFragment = 'before') {
