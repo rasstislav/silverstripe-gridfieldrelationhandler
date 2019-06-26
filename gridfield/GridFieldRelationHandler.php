@@ -110,13 +110,12 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 		if(!$this->useToggle) {
 			$fields = array(
                 GridField_FormAction::create(
-					'GridField_FormAction',
 					$gridField,
 					'relationhandler-saverel',
 					$this->getButtonTitle('SAVE_RELATION'),
 					'saveGridRelation',
 					null
-				)->addExtraClass('relationhandler-saverel')
+				)->addExtraClass('relationhandler-saverel btn btn-primary font-icon-save')
 			);
 		} elseif($state->ShowingRelation) {
 			$fields = array(
@@ -126,14 +125,14 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('CANCELSAVE_RELATION'),
 					'cancelGridRelation',
 					null
-				)->addExtraClass('relationhandler-cancelrel'),
+				)->addExtraClass('relationhandler-cancelrel btn btn-outline-secondary'),
                 GridField_FormAction::create(
 					$gridField,
 					'relationhandler-saverel',
 					$this->getButtonTitle('SAVE_RELATION'),
 					'saveGridRelation',
 					null
-				)->addExtraClass('relationhandler-saverel')
+				)->addExtraClass('relationhandler-saverel btn btn-primary font-icon-save')
 			);
 		} else {
 			$fields = array(
@@ -143,7 +142,7 @@ abstract class GridFieldRelationHandler implements GridField_ColumnProvider, Gri
 					$this->getButtonTitle('TOGGLE_RELATION'),
 					'toggleGridRelation',
 					null
-				)->addExtraClass('relationhandler-togglerel')
+				)->addExtraClass('relationhandler-togglerel btn btn-outline-secondary font-icon-link')
 			);
 		}
 		return ArrayList::create($fields);
