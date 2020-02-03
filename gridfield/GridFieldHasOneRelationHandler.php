@@ -14,7 +14,7 @@ class GridFieldHasOneRelationHandler extends GridFieldRelationHandler {
 		$this->onObject = $onObject;
 		$this->relationName = $relationName;
 
-		$hasOne = $onObject->has_one($relationName);
+		$hasOne = $onObject->hasOne($relationName);
 		if(!$hasOne) {
 			user_error('Unable to find a has_one relation named ' . $relationName . ' on ' . $onObject->ClassName, E_USER_WARNING);
 		}
@@ -32,9 +32,11 @@ class GridFieldHasOneRelationHandler extends GridFieldRelationHandler {
 
 	public function getColumnContent($gridField, $record, $columnName) {
 		$class = $gridField->getModelClass();
-		if(!($class == $this->targetObject || is_subclass_of($class, $this->targetObject))) {
-			user_error($class . ' is not a subclass of ' . $this->targetObject . '. Perhaps you wanted to use ' . $this->targetObject . '::get() as the list for this GridField?', E_USER_WARNING);
-		}
+		
+		//@todo This requires fixing, targetObject is an array now
+		//if(!($class == $this->targetObject || is_subclass_of($class, $this->targetObject))) {
+		//	user_error($class . ' is not a subclass of ' . $this->targetObject . '. Perhaps you wanted to use ' . $this->targetObject . '::get() as the list for this GridField?', E_USER_WARNING);
+		//}
 
 		$state = $this->getState($gridField);
 		
