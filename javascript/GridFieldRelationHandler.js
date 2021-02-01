@@ -19,7 +19,7 @@ jQuery(function($) {
 				if(input.hasClass('radio')) {
 					state.RelationVal = input.val();
 				} else if(input.hasClass('checkbox')) {
-					if(state.RelationVal.indexOf) {
+					if(state.RelationVal && state.RelationVal.indexOf) {
 						if(input.is(':checked')) {
 							state.RelationVal.push(parseInt(input.val()));
 						} else {
