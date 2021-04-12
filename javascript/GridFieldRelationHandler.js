@@ -8,7 +8,9 @@ jQuery(function($) {
 		});
 		$('.ss-gridfield .ss-gridfield-item .col-noedit input').entwine({
 			getState: function () {
-				return this.getGridField().getState().GridFieldRelationHandler;
+			  var grh = this.getGridField().getState().GridFieldRelationHandler;
+        grh.RelationVal = Object.values(grh.RelationVal);
+				return grh;
 			},
 			setState: function(val) {
 				this.getGridField().setState('GridFieldRelationHandler', val);
