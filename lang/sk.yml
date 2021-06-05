@@ -1,0 +1,5 @@
+sk:
+  GridFieldRelationHandler:
+    TOGGLE_RELATION-Changerelationstatus: "Zmeniť stav"
+    CANCELSAVE_RELATION-Cancelchanges: "Zrušiť zmeny"
+    SAVE_RELATION-Savechanges: "Uložiť zmeny"
